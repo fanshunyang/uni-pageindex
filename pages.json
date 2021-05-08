@@ -1,0 +1,96 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "z-paging"
+			}
+		}, {
+			"path": "pages/common-demo/common-demo",
+			"style": {
+				"navigationBarTitleText": "普通模式演示",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/custom-demo/custom-demo",
+			"style": {
+				"navigationBarTitleText": "自定义下拉刷新与上拉加载演示",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/scroll-tab-swiper-demo/scroll-tab-swiper-demo",
+			"style": {
+				"navigationBarTitleText": "滑动切换选项卡演示",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/page-default-demo/page-default-demo",
+			"style": {
+				"navigationBarTitleText": "使用页面滚动示例",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/sticky-demo/sticky-demo",
+			"style": {
+				"navigationBarTitleText": "滚动吸附效果演示",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/chat-history-demo/chat-history-demo",
+			"style": {
+				"navigationBarTitleText": "聊天记录模式演示",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/nvue-demo/nvue-demo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "nvue演示",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/scroll-tab-swiper-demo-n/scroll-tab-swiper-demo-n",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "滑动切换选项卡演示(nvue)",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/sticky-and-scroll-tab-demo/sticky-and-scroll-tab-demo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "滑动切换选项卡+吸顶演示",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/custom-nav-demo/custom-nav-demo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "自定义导航栏演示",
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "white",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "z-paging",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}

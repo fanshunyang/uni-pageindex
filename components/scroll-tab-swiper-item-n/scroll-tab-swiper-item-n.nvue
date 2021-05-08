@@ -1,0 +1,115 @@
+<template>
+	<view class="content">
+		<!-- 这里设置了z-paging加载时禁止自动调用reload方法，自行控制何时reload（懒加载）-->
+		<z-paging ref="paging" @query="queryList" :list.sync="dataList" :mounted-auto-call-reload="false" style="flex: 1;">
+			<!-- 请使用template，不要使用block！！！ -->
+			<template v-for="(item,index) in dataList">
+				<!-- #ifdef APP-NVUE -->
+				<cell class="item" :key="item.title" @click="itemClick(item)">
+					<text class="item-title">{{item.title}}</text>
+					<text class="item-detail">{{item.detail}}</text>
+					<view class="item-line"></view>
+				</cell>
+				<!-- #endif -->
+				<!-- #ifndef APP-NVUE -->
+				<view class="item" :key="index" @click="itemClick(item)">
+					<view class="item-title">{{item.title}}</view>
+					<view class="item-detail">{{item.detail}}</view>
+					<view class="item-line"></view>
+				</view>
+				<!-- #endif -->
+			</template>
+		</z-paging>
+	</view>
+</template>
+
+<script>
+	import request from '../../http/request.js'
+	export default {
+		data() {
+			return {
+				dataList: [],
+				firstLoaded: false
+			}
+		},
+		props:{
+			tabIndex: {
+				type: Number,
+				default: function(){
+					return 0
+				}
+			},
+			currentIndex: {
+				type: Number,
+				default: function(){
+					return 0
+				}
+			},
+		},
+		watch: {
+			currentIndex: {
+				handler(newVal) {
+					if(newVal === this.tabIndex){
+						//懒加载，当滑动到当前的item时，才去加载
+						if(!this.firstLoaded){
+							this.$nextTick(()=>{
+								this.$refs.paging.reload();
+							})
+						}
+					}
+				},
+				immediate: true
+			},
+		},
+		methods: {
+			queryList(pageNo, pageSize) {
+				//组件加载时会自动触发此方法，因此默认页面加载时会自动触发，无需手动调用
+				//这里的pageNo和pageSize会自动计算好，直接传给服务器即可
+				//模拟请求服务器获取分页数据，请替换成自己的网络请求
+				request.queryList(pageNo, pageSize, this.tabIndex + 1, (data) => {
+					this.$refs.paging.complete(data);
+					this.firstLoaded = true;
+				})
+			},
+			itemClick(item) {
+				console.log('点击了', item.title);
+			}
+		}
+	}
+</script>
+
+<style>
+	
+	.content {
+		flex: 1;
+	}
+	
+	.item {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		position: relative;
+		height: 150rpx;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0rpx 30rpx;
+	}
+	
+	.item-detail {
+		padding: 5rpx 15rpx;
+		border-radius: 10rpx;
+		font-size: 28rpx;
+		color: white;
+		background-color: #007AFF;
+	}
+	
+	.item-line {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background-color: #eeeeee;
+	}
+</style>
